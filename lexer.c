@@ -64,8 +64,6 @@ static int getCurrentToken(){
                 numberStr += lastCharacter;
                 lastCharacter = getchar();
             }
-            numberStr += lastCharacter;
-            lastCharacter = getchar();
         }while (isdigit(lastCharacter) || LastChar == '.');
 
         numberValue = strtod(numberStr.c_str(), 0);
