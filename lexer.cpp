@@ -10,7 +10,7 @@
 
 // Scanner aka. lexer
 
-enum currentToken{
+enum currentToken {
     token_fileEnd = -1,
     token_definition = -2,
     token_number = -3,
@@ -21,15 +21,15 @@ enum currentToken{
 static std::string identStr;
 static double numberValue;
 
-static int getCurrentToken(){
+static int getCurrentToken() {
     static int lastCharacter = ' ';
 
     //white spaces are for humans not computers ;)
     while (isspace(lastCharacter))
-    lastCharacter = getchar();
+        lastCharacter = getchar();
 
     //is it an alphanumeric character?
-    if(isalpha(lastCharacter)){
+    if (isalpha(lastCharacter)) {
         identStr = lastCharacter;
         while (isalnum((lastCharacter = getchar())))
         {
@@ -37,51 +37,55 @@ static int getCurrentToken(){
         }
 
         //recognize identifiers and keywords
-        if (identStr == "define"){
+        if (identStr == "define") {
             return token_definition;
-        }else if(identStr == "extern") {
-            return tok_extern;
-        }else {
+        }
+        else if (identStr == "extern") {
+            return token_extern;
+        }
+        else {
             return token_identifier;
         }
     }
 
     //digits
-    if (isdigit(lastCharacter) || lastCharacter == '.'){
+    if (isdigit(lastCharacter) || lastCharacter == '.') {
         std::string numberStr;
 
         //ensure we get numbers correctly, so input 1.23.45.67 will compile to value 1.234567.
         bool firstDotChar = false;
 
-        do {   
-            if (lastCharacter == '.' && !firstDotChar){
+        do {
+            if (lastCharacter == '.' && !firstDotChar) {
                 numberStr += lastCharacter;
                 lastCharacter = getchar();
-                firstDotChar = true; 
-            }else if (lastCharacter == '.' && firstDotChar){
+                firstDotChar = true;
+            }
+            else if (lastCharacter == '.' && firstDotChar) {
                 lastCharacter = getchar();
-            }else {
+            }
+            else {
                 numberStr += lastCharacter;
                 lastCharacter = getchar();
             }
-        }while (isdigit(lastCharacter) || lastCharacter == '.');
+        } while (isdigit(lastCharacter) || lastCharacter == '.');
 
         numberValue = strtod(numberStr.c_str(), 0);
         return token_number;
     }
 
     //comments $, fuck poeple that want to use this over | in bitwise OR
-    if (lastCharacter == '$'){
+    if (lastCharacter == '$') {
         do {
             lastCharacter = getchar();
-        }while (lastCharacter != EOF && lastCharacter != '\n' && lastCharacter != '\r');
+        } while (lastCharacter != EOF && lastCharacter != '\n' && lastCharacter != '\r');
 
-        if (lastCharacter != EOF){
+        if (lastCharacter != EOF) {
             return getCurrentToken();
         }
     }
 
-    if (lastCharacter == EOF){
+    if (lastCharacter == EOF) {
         token_fileEnd;
     }
 
@@ -89,4 +93,3 @@ static int getCurrentToken(){
     lastCharacter = getchar();
     return tChar;
 }
-
