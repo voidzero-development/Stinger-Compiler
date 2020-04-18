@@ -58,16 +58,12 @@ static int getCurrentToken() {
         do {
             if (lastCharacter == '.' && !firstDotChar) {
                 numberStr += lastCharacter;
-                lastCharacter = getchar();
                 firstDotChar = true;
-            }
-            else if (lastCharacter == '.' && firstDotChar) {
-                lastCharacter = getchar();
             }
             else {
                 numberStr += lastCharacter;
-                lastCharacter = getchar();
             }
+            lastCharacter = getchar();
         } while (isdigit(lastCharacter) || lastCharacter == '.');
 
         numberValue = strtod(numberStr.c_str(), 0);
