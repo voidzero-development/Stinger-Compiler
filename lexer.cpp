@@ -47,14 +47,14 @@ static int getCurrentToken(){
     }
 
     //digits
-    if (isdigit(lastCharacter) || LastChar == '.'){
+    if (isdigit(lastCharacter) || lastCharacter == '.'){
         std::string numberStr;
 
         //ensure we get numbers correctly, so input 1.23.45.67 will compile to value 1.234567.
         bool firstDotChar = false;
 
         do {   
-            if (LastChar == '.' && !firstDotChar){
+            if (lastCharacter == '.' && !firstDotChar){
                 numberStr += lastCharacter;
                 lastCharacter = getchar();
                 firstDotChar = true; 
@@ -64,7 +64,7 @@ static int getCurrentToken(){
                 numberStr += lastCharacter;
                 lastCharacter = getchar();
             }
-        }while (isdigit(lastCharacter) || LastChar == '.');
+        }while (isdigit(lastCharacter) || lastCharacter == '.');
 
         numberValue = strtod(numberStr.c_str(), 0);
         return token_number;
