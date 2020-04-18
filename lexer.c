@@ -12,10 +12,10 @@
 
 enum currentToken{
     token_fileEnd = -1,
-    token_definition = 1,
-    token_number = 2,
-    token_extern = 3,
-    token_identifier = 4,
+    token_definition = -2,
+    token_number = -3,
+    token_extern = -4,
+    token_identifier = -5,
 };
 //some defines for getting the current token correctly
 static std::string identStr;
