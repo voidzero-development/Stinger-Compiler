@@ -58,7 +58,7 @@ static int getCurrentToken(){
                 numberStr += lastCharacter;
                 lastCharacter = getchar();
                 firstDotChar = true; 
-            }else if (LastChar == '.' && firstDotChar){
+            }else if (lastCharacter == '.' && firstDotChar){
                 lastCharacter = getchar();
             }else {
                 numberStr += lastCharacter;
